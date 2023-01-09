@@ -4,12 +4,28 @@
 
 using namespace std;
 
-//constructors
-Polynomial:: Polynomial( ){
+ostream &operator<<(ostream &out, const Polynomial &number){
 
 }
+
+//constructors
+Polynomial:: Polynomial( ){
+    size = 0;
+    head -> next = nullptr;
+    head -> prev = nullptr;
+    head -> coeff = 0;
+    head -> power = 0;
+}
 Polynomial:: Polynomial( const Polynomial& p ){
-    
+    this -> size = p.size;
+    this -> head = p.head;
+    if(this -> head -> next != nullptr){
+        this -> head = this -> head -> next;
+        p.head = p.next;
+        for(int i = 1; i < p.size; i++){
+            head = 
+        }  
+    }
 }
 
 //destructor
