@@ -8,7 +8,7 @@ ostream &operator<<(ostream &out, const Polynomial &number){
 
 }
 
-//constructors
+//constructor from nothing
 Polynomial:: Polynomial( ){
     size = 0;
     head -> next = nullptr;
@@ -16,21 +16,17 @@ Polynomial:: Polynomial( ){
     head -> coeff = 0;
     head -> power = 0;
 }
+//copy constructor from one polynomial to a new polynomial 
 Polynomial:: Polynomial( const Polynomial& p ){
     this -> size = p.size;
     this -> head = p.head;
-    if(this -> head -> next != nullptr){
-        this -> head = this -> head -> next;
-        p.head = p.next;
-        for(int i = 1; i < p.size; i++){
-            head = 
-        }  
-    }
 }
 
 //destructor
 Polynomial:: ~Polynomial( ){
-
+    for(int i = 0; i < size; i++){
+        
+    }
 }
 
 //get the highest degree of the poly
@@ -89,6 +85,6 @@ bool Polynomial:: insert( Term* pos, const double newCoefficient, const int powe
 }
 //remove a base from the poly
 bool Polynomial:: remove( Term* pos ){
-
+    
 
 }
