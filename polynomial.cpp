@@ -58,7 +58,16 @@ bool Polynomial:: changeCoefficient( const double newCoefficient, const int powe
     Term* copy = head;
     while(copy -> next != head){
         if(copy -> power == power){
-            copy -> coeff = newCoefficient;
+            if(newCoefficient == 0){
+                remove(copy);
+            }else{
+                copy -> coeff = newCoefficient;
+            }
+            return true;
+        }
+        if(copy -> next -> power < power && (copy -> prev -> power > power || copy -> prev == head)){
+            Term* item = new Term;
+            insert(item, newCoefficient, power);
             return true;
         }
         copy = copy -> next;
@@ -105,11 +114,15 @@ Polynomial& Polynomial:: operator-=( const Polynomial& p ){
 
 //insert a new base into the poly
 bool Polynomial:: insert( Term* pos, const double newCoefficient, const int power ){
+    pos -> coeff = newCoefficient;
+    pos -> power = power;
+
     Term *copy = head;
     Term* hold = head -> next;
     while(copy -> next != head){
         if(copy -> next -> power < power){
-            
+
+            size++;
             return true;
         }
         copy = copy -> next;
@@ -129,5 +142,6 @@ bool Polynomial:: remove( Term* pos ){
     copy -> next -> prev = copy -> prev;
     copy -> prev -> next = copy -> next;
     delete pos;
+    size--;
     return true;
 }
