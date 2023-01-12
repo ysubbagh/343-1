@@ -24,20 +24,32 @@ Polynomial:: Polynomial( const Polynomial& p ){
 
 //destructor
 Polynomial:: ~Polynomial( ){
-
+    head -> prev = nullptr;
+    while(head -> next != nullptr){
+        head = head -> next;
+        delete head -> prev;
+    }
+    delete head;
 }
 
 //get the highest degree of the poly
 int Polynomial:: degree( ) const {
     if(head -> next == head){
-        return -1;
+        return -1; // base case
     }
     return head -> next -> power;
 }
 
 //get the coeffient of the given power in the poly
 double Polynomial:: coefficient(const int power) const {
-
+    Term* copy = head;
+    while(copy -> next != head){
+        if(copy -> power == power){
+            return copy -> coeff;
+        }
+        copy = copy -> next;
+    }
+    return -1; // base case
 }
 
 //change the coeffient of the given power in the poly
