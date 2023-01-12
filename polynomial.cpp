@@ -5,14 +5,14 @@
 using namespace std;
 
 ostream &operator<<(ostream &out, const Polynomial &number){
-
+    
 }
 
 //constructor from nothing
 Polynomial:: Polynomial( ){
     size = 0;
-    head -> next = nullptr;
-    head -> prev = nullptr;
+    head -> next = head;
+    head -> prev = head;
     head -> coeff = 0;
     head -> power = 0;
 }
@@ -24,15 +24,15 @@ Polynomial:: Polynomial( const Polynomial& p ){
 
 //destructor
 Polynomial:: ~Polynomial( ){
-    for(int i = 0; i < size; i++){
-        
-    }
+
 }
 
 //get the highest degree of the poly
 int Polynomial:: degree( ) const {
-
-
+    if(head -> next == head){
+        return -1;
+    }
+    return head -> next -> power;
 }
 
 //get the coeffient of the given power in the poly
@@ -80,8 +80,12 @@ Polynomial& Polynomial:: operator-=( const Polynomial& p ){
 
 //insert a new base into the poly
 bool Polynomial:: insert( Term* pos, const double newCoefficient, const int power ){
+    Term* newNode; 
+    Term* copy = head;
+    while(copy != nullptr && copy -> power > power && copy -> next -> power < power){
 
-
+    }
+    return true;
 }
 //remove a base from the poly
 bool Polynomial:: remove( Term* pos ){
