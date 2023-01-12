@@ -11,6 +11,7 @@ ostream &operator<<(ostream &out, const Polynomial &number){
 //constructor from nothing
 Polynomial:: Polynomial( ){
     size = 0;
+    head = new Term;
     head -> next = head;
     head -> prev = head;
     head -> coeff = 0;
@@ -54,15 +55,27 @@ double Polynomial:: coefficient(const int power) const {
 
 //change the coeffient of the given power in the poly
 bool Polynomial:: changeCoefficient( const double newCoefficient, const int power) {
-
-
+    Term* copy = head;
+    while(copy -> next != head){
+        if(copy -> power == power){
+            copy -> coeff = newCoefficient;
+            return true;
+        }
+        copy = copy -> next;
+    }
+    return false; // base case
 }
 
 //math
 // Arithmetic operators
 //add polys together and return a new poly
 Polynomial Polynomial:: operator+( const Polynomial& p ) const{
+    Term* copy1 = this -> head;
+    Term* copy2 = p.head;
 
+    while (copy2 != p.head){
+
+    }
 }
 //subtract a poly from another and return a new poly
 Polynomial Polynomial:: operator-( const Polynomial& p ) const{
@@ -92,15 +105,29 @@ Polynomial& Polynomial:: operator-=( const Polynomial& p ){
 
 //insert a new base into the poly
 bool Polynomial:: insert( Term* pos, const double newCoefficient, const int power ){
-    Term* newNode; 
-    Term* copy = head;
-    while(copy != nullptr && copy -> power > power && copy -> next -> power < power){
-
+    Term *copy = head;
+    Term* hold = head -> next;
+    while(copy -> next != head){
+        if(copy -> next -> power < power){
+            
+            return true;
+        }
+        copy = copy -> next;
+        hold = hold -> next;
     }
-    return true;
+    return false; // base case
 }
 //remove a base from the poly
 bool Polynomial:: remove( Term* pos ){
-    
-
+    Term* copy = head;
+    if(copy -> next == head){
+        return false; // base case
+    }
+    while(copy -> next != pos){
+        copy = copy -> next;
+    }
+    copy -> next -> prev = copy -> prev;
+    copy -> prev -> next = copy -> next;
+    delete pos;
+    return true;
 }
