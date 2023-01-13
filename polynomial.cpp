@@ -5,7 +5,14 @@
 using namespace std;
 
 ostream &operator<<(ostream &out, const Polynomial &number){
-    
+    Polynomial:: Term *copy = number.head;
+    while(copy -> next != number.head){
+        out << copy -> coeff << "x^" << copy -> power;
+        if(copy -> next != number.head){
+            out << " + ";
+        }
+    }
+    return out;
 }
 
 //constructor from nothing
